@@ -11,7 +11,7 @@ server.use(express.json());
 //get
 
 server.get('/api/notes', (req, res) =>{
-    db('cohorts')
+    db('notes')
     .then(notes =>{
         res
         .status(200)
@@ -53,11 +53,11 @@ server.post('/api/notes', (req, res) =>{
     if(note.title && note.textBody){
         db('notes').insert(note)
         .then( newId =>{
-            db(notes).where('id', newId)
-            .then(note =>{
+            db('notes').where('id', newId[0])
+            .then(newNote =>{
                 res
                 .status(201)
-                .json(note)
+                .json(newNote)
             })
         })
         .catch(err =>{
@@ -103,11 +103,11 @@ server.put('/api/notes/:id', (req, res) =>{
         db('notes').where('id', id).update(note)
         .then(count =>{
             if(count ===1){
-                db(notes).where('id', id)
-                .then(note =>{
+                db('notes').where('id', id)
+                .then(updatedNote =>{
                     res
                     .status(201)
-                    .json(note)
+                    .json(updatedNote)
                 })
             } else {
                 res

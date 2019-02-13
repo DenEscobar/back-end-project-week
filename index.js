@@ -48,6 +48,30 @@ server.get('/api/notes/:id', (req, res) =>{
 });
 //post
 
+server.post('/api/notes', (req, res) =>{
+    const note=req.body;
+    if(note.title && note.textBody){
+        db('notes').insert(note)
+        .then( newId =>{
+            db(notes).where('id', newId)
+            .then(note =>{
+                res
+                .status(201)
+                .json(note)
+            })
+        })
+        .catch(err =>{
+            res
+            .status(500)
+            .json({error: 'The note could not be created'})
+        })
+    } else {
+        res
+        .status(400)
+        .json({error: 'Missing parameters. Check for note title and body'})
+    }
+})
+
 //delete
 
 //put

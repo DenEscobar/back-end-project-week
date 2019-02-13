@@ -70,11 +70,33 @@ server.post('/api/notes', (req, res) =>{
         .status(400)
         .json({error: 'Missing parameters. Check for note title and body'})
     }
-})
+});
 
 //delete
 
+server.delete('/api/notes/:id', (req, res) =>{
+    const {id} = req.params;
+    db('notes').where('id', id).del()
+    .then(count =>{
+        if(count === 1){
+            res
+            .status(200)
+            .json({message: `Note ${id} deleted`})
+        } else {
+            res
+            .status(404)
+            .json({message: 'The specified note could not be found'})
+        }
+    })
+    .catch(err =>{
+        res
+        .status(500)
+        .json({error: 'The note could not be removed'})
+    })
+});
+
 //put
+
 
 server.listen(PORT, ()=>{
     console.log(`On Port ${PORT}`)

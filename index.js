@@ -96,7 +96,36 @@ server.delete('/api/notes/:id', (req, res) =>{
 });
 
 //put
-
+server.put('/api/notes/:id', (req, res) =>{
+    const {id} = req.params;
+    const note = req.body;
+    if(note.title && note.textBody){
+        db('notes').where('id', id).update(note)
+        .then(count =>{
+            if(count ===1){
+                db(notes).where('id', id)
+                .then(note =>{
+                    res
+                    .status(201)
+                    .json(note)
+                })
+            } else {
+                res
+                .status(404)
+                .json({message: 'The specified note could not be found'})
+            }
+        })
+        .catch(err =>{
+            res
+            .status(500)
+            .json({error: "The note could not be updated"})
+        })
+    } else {
+        res
+        .status(400)
+        .json({error: 'Missing parameters. Check for note title and body'})
+    }
+})
 
 server.listen(PORT, ()=>{
     console.log(`On Port ${PORT}`)

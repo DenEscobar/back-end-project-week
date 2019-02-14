@@ -5,7 +5,7 @@ const dbConfig = require('./knexfile');
 const cors = require('cors');
 
 const db = knex(dbConfig.development)
-const PORT = 9999;
+const PORT = process.env.PORT || 9999;
 
 server.use(express.json());
 server.use(cors());

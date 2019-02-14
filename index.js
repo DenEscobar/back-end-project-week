@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 9999;
 server.use(express.json());
 server.use(cors());
 
-//get
 
 server.get('/api/notes', (req, res) =>{
     db('notes')
@@ -26,7 +25,6 @@ server.get('/api/notes', (req, res) =>{
     })
 });
 
-//get by id
 
 server.get('/api/notes/:id', (req, res) =>{
     const {id} = req.params;
@@ -48,7 +46,7 @@ server.get('/api/notes/:id', (req, res) =>{
         .json({error: 'The note could not be retrieved'})
     })
 });
-//post
+
 
 server.post('/api/notes', (req, res) =>{
     const note=req.body;
@@ -74,7 +72,6 @@ server.post('/api/notes', (req, res) =>{
     }
 });
 
-//delete
 
 server.delete('/api/notes/:id', (req, res) =>{
     const {id} = req.params;
@@ -97,7 +94,7 @@ server.delete('/api/notes/:id', (req, res) =>{
     })
 });
 
-//put
+
 server.put('/api/notes/:id', (req, res) =>{
     const {id} = req.params;
     const note = req.body;

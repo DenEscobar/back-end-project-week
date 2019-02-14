@@ -74,3 +74,5 @@ You will notice that this repository does not have any starter code. This is on 
 ## Trello Board 
 
 -https://trello.com/b/8V4L31Do/lambda-notesbackend-denise-escobar
+
+//going to deploy to heroku

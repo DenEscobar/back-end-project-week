@@ -4,11 +4,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: {
-      database: './data/notes.db',
-      user:     'Denise',
-      password: 'Cps39351056'
-    },
+    connection: 'postgres://localhost/notes',
     useNullAsDefault: true,
     migrations: {
       directory: './data/migrations'
@@ -17,15 +13,7 @@ module.exports = {
 
   staging: {
     client: 'pg',
-    connection: {
-      database: './data/notes.db',
-      user:     'Denise',
-      password: '1234'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    connection: 'postgres://localhost/notes',
     migrations: {
       tableName: './data/migrations'
     }
@@ -33,15 +21,7 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: {
-      database:'./data/notes.db',
-      user:     'Denise',
-      password: '1234'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    connection: 'postgres://localhost/notes',
     migrations: {
       tableName: './data/migrations'
     }

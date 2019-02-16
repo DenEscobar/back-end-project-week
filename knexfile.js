@@ -3,9 +3,11 @@
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'pg',
     connection: {
-      filename: './data/notes.db'
+      database: './data/notes.db',
+      user:     'Denise',
+      password: 'Cps39351056'
     },
     useNullAsDefault: true,
     migrations: {
@@ -14,34 +16,34 @@ module.exports = {
   },
 
   staging: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      database: './data/notes.db',
+      user:     'Denise',
+      password: '1234'
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      tableName: './data/migrations'
     }
   },
 
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      database:'./data/notes.db',
+      user:     'Denise',
+      password: '1234'
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      tableName: './data/migrations'
     }
   }
 

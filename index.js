@@ -11,7 +11,7 @@ server.use(express.json());
 server.use(cors());
 
 
-server.get('/api/notes', (req, res) =>{
+server.get('/api/catnotes', (req, res) =>{
     db('catNotes')
     .then(notes =>{
         res
@@ -26,7 +26,7 @@ server.get('/api/notes', (req, res) =>{
 });
 
 
-server.get('/api/notes/:id', (req, res) =>{
+server.get('/api/catnotes/:id', (req, res) =>{
     const {id} = req.params;
     db('catNotes').where('id', id)
     .then(note =>{
@@ -48,12 +48,12 @@ server.get('/api/notes/:id', (req, res) =>{
 });
 
 
-server.post('/api/notes', (req, res) =>{
+server.post('/api/catnotes', (req, res) =>{
     const note=req.body;
     if(note.title && note.textBody){
         db('catNotes').insert(note)
         .then( newId =>{
-            db('notes').where('id', newId[0])
+            db('catNotes').where('id', newId[0])
             .then(newNote =>{
                 res
                 .status(201)
@@ -73,7 +73,7 @@ server.post('/api/notes', (req, res) =>{
 });
 
 
-server.delete('/api/notes/:id', (req, res) =>{
+server.delete('/api/catnotes/:id', (req, res) =>{
     const {id} = req.params;
     db('catNotes').where('id', id).del()
     .then(count =>{
@@ -95,7 +95,7 @@ server.delete('/api/notes/:id', (req, res) =>{
 });
 
 
-server.put('/api/notes/:id', (req, res) =>{
+server.put('/api/catnotes/:id', (req, res) =>{
     const {id} = req.params;
     const note = req.body;
     if(note.title && note.textBody){

@@ -3,27 +3,35 @@
 module.exports = {
 
   development: {
-    client: 'pg',
-    connection: 'postgres://localhost/notes',
+    client: 'sqlite3',
+    connection: {
+      filename: './data/catNotes'
+    },
     useNullAsDefault: true,
-    migrations: {
+    migrations:{
       directory: './data/migrations'
     }
   },
 
   staging: {
-    client: 'pg',
-    connection: 'postgres://localhost/notes',
-    migrations: {
-      tableName: './data/migrations'
+    client: 'sqlite3',
+    connection: {
+      filename: './data/catNotes'
+    },
+    useNullAsDefault: true,
+    migrations:{
+      directory: './data/migrations'
     }
   },
 
   production: {
-    client: 'pg',
-    connection: 'postgres://localhost/notes',
-    migrations: {
-      tableName: './data/migrations'
+    client: 'sqlite3',
+    connection: {
+      filename: './data/catNotes'
+    },
+    useNullAsDefault: true,
+    migrations:{
+      directory: './data/migrations'
     }
   }
 

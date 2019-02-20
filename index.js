@@ -12,7 +12,7 @@ server.use(cors());
 
 
 server.get('/api/notes', (req, res) =>{
-    db('notes')
+    db('catNotes')
     .then(notes =>{
         res
         .status(200)
@@ -28,7 +28,7 @@ server.get('/api/notes', (req, res) =>{
 
 server.get('/api/notes/:id', (req, res) =>{
     const {id} = req.params;
-    db('notes').where('id', id)
+    db('catNotes').where('id', id)
     .then(note =>{
         if(note.length !==0){
             res
@@ -51,7 +51,7 @@ server.get('/api/notes/:id', (req, res) =>{
 server.post('/api/notes', (req, res) =>{
     const note=req.body;
     if(note.title && note.textBody){
-        db('notes').insert(note)
+        db('catNotes').insert(note)
         .then( newId =>{
             db('notes').where('id', newId[0])
             .then(newNote =>{
@@ -75,7 +75,7 @@ server.post('/api/notes', (req, res) =>{
 
 server.delete('/api/notes/:id', (req, res) =>{
     const {id} = req.params;
-    db('notes').where('id', id).del()
+    db('catNotes').where('id', id).del()
     .then(count =>{
         if(count === 1){
             res
@@ -99,7 +99,7 @@ server.put('/api/notes/:id', (req, res) =>{
     const {id} = req.params;
     const note = req.body;
     if(note.title && note.textBody){
-        db('notes').where('id', id).update(note)
+        db('catNotes').where('id', id).update(note)
         .then(count =>{
             if(count ===1){
                 db('notes').where('id', id)
